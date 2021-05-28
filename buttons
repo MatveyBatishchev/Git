@@ -1,0 +1,298 @@
+package CalculatorApp;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+// 1
+class OneEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("1");
+        else panel.setText(panel.getText()+"1");
+        }
+    }
+}
+
+// 2
+class TwoEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("2");
+        else panel.setText(panel.getText()+"2"); }
+    }
+}
+
+// 3
+class ThreeEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("3");
+        else panel.setText(panel.getText()+"3"); }
+    }
+}
+
+// 4
+class FourEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("4");
+        else panel.setText(panel.getText()+"4"); }
+    }
+}
+
+// 5
+class FiveEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("5");
+        else panel.setText(panel.getText()+"5"); }
+    }
+}
+
+// 6
+class SixEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("6");
+        else panel.setText(panel.getText()+"6"); }
+    }
+}
+
+// 7
+class SevenEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("7");
+        else panel.setText(panel.getText()+"7"); }
+    }
+}
+
+// 8
+class EightEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("8");
+        else panel.setText(panel.getText()+"8"); }
+    }
+}
+
+// 9
+class NineEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("9");
+        else panel.setText(panel.getText()+"9"); }
+    }
+}
+
+// 0
+class ZeroEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+        if (panel.getText().equals("0")) Client.getLog().setText("0");
+        else panel.setText(panel.getText()+"0"); }
+    }
+}
+
+// .
+class PointEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        if (panel.getText().length() < 10) {
+            if (!panel.getText().contains(".")) panel.setText(panel.getText() + ".");
+        }
+    }
+}
+
+// C
+class DeleteEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        Calculator calculator = Client.getCalculator();
+        panel.setText("0");
+        calculator.setNum1(0);
+        calculator.setNum2(0);
+        calculator.setNum1Occupied(false);
+    }
+}
+
+// ⌫
+class BackspaceEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        Calculator calculator = Client.getCalculator();
+        panel.setText(panel.getText().substring(0,panel.getText().length()-1));
+        if (panel.getText().equals("")) panel.setText("0");
+        if (calculator.getOperator().equals("")) {
+                calculator.setNum1(Double.parseDouble((panel.getText() + "")));
+        }
+        else {
+                calculator.setNum2(Double.parseDouble((panel.getText() + "")));
+        }
+    }
+}
+
+// +/-
+class SignChangerEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        Calculator calculator = Client.getCalculator();
+        if (!panel.getText().equals("0")) {
+            if (panel.getText().length() == 10 && panel.getText().charAt(0) == '-')
+                panel.setText(panel.getText().substring(1));
+            else {
+                if (panel.getText().length() < 10) {
+                    if (panel.getText().charAt(0) == '-') panel.setText(panel.getText().substring(1));
+                    else panel.setText("-" + panel.getText());
+                }
+            }
+        }
+        if (calculator.getOperator().equals("")) {
+            calculator.setNum1(calculator.getNum1() * (-1));
+        }
+        else calculator.setNum2(calculator.getNum2() * (-1));
+    }
+}
+
+// +
+class PlusEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+            JTextField panel = Client.getLog();
+            Calculator calculator = Client.getCalculator();
+            if (!calculator.isNum1Occupied()) {
+                calculator.setNum1(Double.parseDouble(panel.getText()));
+                calculator.setNum1Occupied(true);
+            }
+            else {
+                if (calculator.getOperator().equals("/") && calculator.getNum2() == 0) {
+                    JOptionPane.showMessageDialog(null, "Division on 0 is impossible!", "Output", JOptionPane.WARNING_MESSAGE);
+                }
+                calculator.setNum2(Double.parseDouble(panel.getText()));
+                double result = calculator.calculate();
+                if ((result + "").length() > 10) panel.setText((result + "").substring(0, 10));
+                else panel.setText(result + "");
+            }
+        calculator.setOperator("+");
+        panel.setText(""); }
+}
+
+// -
+class MinusEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        Calculator calculator = Client.getCalculator();
+        if (!calculator.isNum1Occupied()) {
+            calculator.setNum1(Double.parseDouble(panel.getText()));
+            calculator.setNum1Occupied(true);
+        }
+        else {
+            if (calculator.getOperator().equals("/") && calculator.getNum2() == 0) {
+                JOptionPane.showMessageDialog(null, "Division on 0 is impossible!", "Output", JOptionPane.WARNING_MESSAGE);
+            }
+            calculator.setNum2(Double.parseDouble(panel.getText()));
+            double result = calculator.calculate();
+            if ((result + "").length() > 10) panel.setText((result + "").substring(0, 10));
+            else panel.setText(result + "");
+        }
+        calculator.setOperator("-");
+        panel.setText("");
+    }
+}
+
+// *
+class MultiplyEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        Calculator calculator = Client.getCalculator();
+        if (!calculator.isNum1Occupied()) {
+            calculator.setNum1(Double.parseDouble(panel.getText()));
+            calculator.setNum1Occupied(true);
+        }
+        else {
+            if (calculator.getOperator().equals("/") && calculator.getNum2() == 0) {
+                JOptionPane.showMessageDialog(null, "Division on 0 is impossible!", "Output", JOptionPane.WARNING_MESSAGE);
+            }
+            calculator.setNum2(Double.parseDouble(panel.getText()));
+            double result = calculator.calculate();
+            if ((result + "").length() > 10) panel.setText((result + "").substring(0, 10));
+            else panel.setText(result + "");
+        }
+        calculator.setOperator("*");
+        panel.setText("");
+    }
+}
+
+// ÷
+class DivideEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        Calculator calculator = Client.getCalculator();
+        if (!calculator.isNum1Occupied()) {
+            calculator.setNum1(Double.parseDouble(panel.getText()));
+            calculator.setNum1Occupied(true);
+        }
+        else {
+            if (calculator.getOperator().equals("/") && calculator.getNum2() == 0) {
+                JOptionPane.showMessageDialog(null, "Division on 0 is impossible!", "Output", JOptionPane.WARNING_MESSAGE);
+            }
+            calculator.setNum2(Double.parseDouble(panel.getText()));
+            double result = calculator.calculate();
+            if ((result + "").length() > 10) panel.setText((result + "").substring(0, 10));
+            else panel.setText(result + "");
+        }
+        calculator.setOperator("/");
+        panel.setText("");
+    }
+}
+
+
+// =
+class EqualsEventListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField panel = Client.getLog();
+        Calculator calculator = Client.getCalculator();
+        if (calculator.getOperator().equals("/") && panel.getText().equals("0")) {
+            JOptionPane.showMessageDialog(null, "Division on 0 is impossible!", "Output", JOptionPane.WARNING_MESSAGE);
+        }
+        else {
+            if (!calculator.getOperator().equals("")) {
+                calculator.setNum2(Double.parseDouble(panel.getText()));
+                System.out.println(calculator.getNum1() + " " + calculator.getOperator() + " " + calculator.getNum2());
+                double result = calculator.calculate();
+                if ((result + "").length() > 10) panel.setText((result + "").substring(0, 10));
+                else panel.setText(result + "");
+            }
+        }
+        calculator.setOperator("");
+    }
+}
