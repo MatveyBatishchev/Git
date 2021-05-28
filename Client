@@ -1,0 +1,192 @@
+package CalculatorApp;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Client extends JFrame {
+    private static final JTextField log = new JTextField("0",10);
+    private final JButton ONE = new JButton("1");
+    private final JButton TWO = new JButton("2");
+    private final JButton THREE = new JButton("3");
+    private final JButton FOUR = new JButton("4");
+    private final JButton FIVE = new JButton("5");
+    private final JButton SIX = new JButton("6");
+    private final JButton SEVEN = new JButton("7");
+    private final JButton EIGHT = new JButton("8");
+    private final JButton NINE = new JButton("9");
+    private final JButton ZERO = new JButton("0");
+    private final JButton plus = new JButton("+");
+    private final JButton minus = new JButton("-");
+    private final JButton multiply = new JButton("*");
+    private final JButton divide = new JButton("÷");
+    private final JButton signChanger = new JButton("+/-");
+    private final JButton equals = new JButton("=");
+    private final JButton delete = new JButton("C");
+    private final JButton point = new JButton(".");
+    private final JButton backspace = new JButton("<~");
+    private static final Calculator calculator = new Calculator();
+
+    public Client() {
+        super("Calculator");
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
+        setSize(343, 455);
+        setResizable(false);
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+
+        // 1
+        ONE.setBounds(10,140,70,55);
+        ONE.setBackground(new Color(245,251,255));
+        ONE.setFont(new Font("Arial", Font.BOLD, 16));
+        ONE.addActionListener(new OneEventListener());
+        panel.add(ONE);
+
+        // 2
+        TWO.setBounds(90,140,70,55);
+        TWO.setBackground(new Color(245,251,255));
+        TWO.setFont(new Font("Arial", Font.BOLD, 16));
+        TWO.addActionListener(new TwoEventListener());
+        panel.add(TWO);
+
+        // 3
+        THREE.setBounds(170,140,70,55);
+        THREE.setBackground(new Color(245,251,255));
+        THREE.setFont(new Font("Arial", Font.BOLD, 16));
+        THREE.addActionListener(new ThreeEventListener());
+        panel.add(THREE);
+
+        // 4
+        FOUR.setBounds(10,200,70,55);
+        FOUR.setBackground(new Color(245,251,255));
+        FOUR.setFont(new Font("Arial", Font.BOLD, 16));
+        FOUR.addActionListener(new FourEventListener());
+        panel.add(FOUR);
+
+        // 5
+        FIVE.setBounds(90,200,70,55);
+        FIVE.setBackground(new Color(245,251,255));
+        FIVE.setFont(new Font("Arial", Font.BOLD, 16));
+        FIVE.addActionListener(new FiveEventListener());
+        panel.add(FIVE);
+
+        // 6
+        SIX.setBounds(170,200,70,55);
+        SIX.setBackground(new Color(245,251,255));
+        SIX.setFont(new Font("Arial", Font.BOLD, 16));
+        SIX.addActionListener(new SixEventListener());
+        panel.add(SIX);
+
+        // 7
+        SEVEN.setBounds(10,260,70,55);
+        SEVEN.setBackground(new Color(245,251,255));
+        SEVEN.setFont(new Font("Arial", Font.BOLD, 16));
+        SEVEN.addActionListener(new SevenEventListener());
+        panel.add(SEVEN);
+
+        // 8
+        EIGHT.setBounds(90,260,70,55);
+        EIGHT.setBackground(new Color(245,251,255));
+        EIGHT.setFont(new Font("Arial", Font.BOLD, 16));
+        EIGHT.addActionListener(new EightEventListener());
+        panel.add(EIGHT);
+
+        // 9
+        NINE.setBounds(170,260,70,55);
+        NINE.setBackground(new Color(245,251,255));
+        NINE.setFont(new Font("Arial", Font.BOLD, 16));
+        NINE.addActionListener(new NineEventListener());
+        panel.add(NINE);
+
+        // 10
+        ZERO.setBounds(90,320,70,55);
+        ZERO.setBackground(new Color(245,251,255));
+        ZERO.setFont(new Font("Arial", Font.BOLD, 16));
+        ZERO.addActionListener(new ZeroEventListener());
+        panel.add(ZERO);
+
+        // +/-
+        signChanger.setBounds(10,320,70,55);
+        signChanger.setBackground(new Color(245,251,255));
+        signChanger.setFont(new Font("Arial", Font.BOLD, 16));
+        signChanger.addActionListener(new SignChangerEventListener());
+        panel.add(signChanger);
+
+        // .
+        point.setBounds(170,320,70,55);
+        point.setBackground(new Color(245,251,255));
+        point.setFont(new Font("Arial", Font.BOLD, 16));
+        point.addActionListener(new PointEventListener());
+        panel.add(point);
+
+        // =
+        equals.setBounds(250,320,70,55);
+        equals.setBackground(new Color(168,219,255));
+        equals.setFont(new Font("Arial", Font.BOLD, 16));
+        equals.addActionListener(new EqualsEventListener());
+        panel.add(equals);
+
+        // +
+        plus.setBounds(250,260,70,55);
+        plus.setBackground(new Color(220,224,229));
+        plus.setFont(new Font("Arial", Font.BOLD, 16));
+        plus.addActionListener(new PlusEventListener());
+        panel.add(plus);
+
+        // -
+        minus.setBounds(250,200,70,55);
+        minus.setBackground(new Color(220,224,229));
+        minus.setFont(new Font("Arial", Font.BOLD, 16));
+        minus.addActionListener(new MinusEventListener());
+        panel.add(minus);
+
+        // *
+        multiply.setBounds(250,140,70,55);
+        multiply.setBackground(new Color(220,224,229));
+        multiply.setFont(new Font("Arial", Font.BOLD, 16));
+        multiply.addActionListener(new MultiplyEventListener());
+        panel.add(multiply);
+
+        // ÷
+        divide.setBounds(250,80,70,55);
+        divide.setBackground(new Color(220,224,229));
+        divide.setFont(new Font("Arial", Font.BOLD, 16));
+        divide.addActionListener(new DivideEventListener());
+        panel.add(divide);
+
+        // C
+        delete.setBounds(10,80,150,55);
+        delete.setBackground(new Color(220,224,229));
+        delete.setFont(new Font("Arial", Font.BOLD, 16));
+        delete.addActionListener(new DeleteEventListener());
+        panel.add(delete);
+
+        // ⌫
+        backspace.setBounds(170,80,70,55);
+        backspace.setBackground(new Color(220,224,229));
+        backspace.setFont(new Font("Arial", Font.BOLD, 16));
+        backspace.addActionListener(new BackspaceEventListener());
+        panel.add(backspace);
+
+        // TextArea
+        log.setBounds(10, 12, 309, 60);
+        log.setFont(new Font("Arial", Font.PLAIN, 50));
+        log.setAlignmentX(CENTER_ALIGNMENT);
+        log.setHorizontalAlignment(SwingConstants.RIGHT);
+        log.setEditable(false);
+        panel.add(log);
+        getContentPane().add(panel);
+    }
+
+    public static void main(String[] args) {
+        new Client();
+    }
+
+    public static JTextField getLog() {
+        return log;
+    }
+
+    public static Calculator getCalculator() {
+        return calculator;
+    }
+}
